@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const baseURL = "https://slung-summers.000webhostapp.com/v1";
+
 const List = () => {
   const navigate = useNavigate();
 
@@ -10,7 +12,7 @@ const List = () => {
 
   const getApiData = async () => {
     await axios
-      .get("/list-all.php")
+      .get(`${baseURL}/list-all.php`)
       .then((response) => setItems(response.data.data))
       .catch((error) => console.log(error));
   };
@@ -30,7 +32,7 @@ const List = () => {
 
   async function handleDelete() {
     await axios
-      .delete("/delete.php", { data: { id: checkboxes } })
+      .delete(`${baseURL}/delete.php`, { data: { id: checkboxes } })
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
 
