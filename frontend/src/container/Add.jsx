@@ -5,7 +5,7 @@ import Dvd from "../components/Dvd";
 import Book from "../components/Book";
 import Furniture from "../components/Furniture";
 
-// const baseURL = "https://slung-summers.000webhostapp.com/v1";
+const baseURL = "https://slung-summers.000webhostapp.com/v1";
 
 const Add = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Add = () => {
 
   const getApiData = () => {
     axios
-      .get(`/list-all.php`)
+      .get(`${baseURL}/list-all.php`)
       .then((response) => setItems(response.data.data))
       .catch((error) => console.log(error));
   };
@@ -53,7 +53,7 @@ const Add = () => {
           setError(true);
         } else if (error === false) {
           await axios
-            .post(`/insert/create-dvd.php`, {
+            .post(`${baseURL}/insert/create-dvd.php`, {
               sku,
               name,
               price,
@@ -70,7 +70,7 @@ const Add = () => {
           setError(true);
         } else if (error === false) {
           await axios
-            .post(`/insert/create-book.php`, {
+            .post(`${baseURL}/insert/create-book.php`, {
               sku,
               name,
               price,
@@ -94,7 +94,7 @@ const Add = () => {
           setError(true);
         } else if (error === false) {
           await axios
-            .post(`/insert/create-furniture.php`, {
+            .post(`${baseURL}/insert/create-furniture.php`, {
               sku,
               name,
               price,
