@@ -6,6 +6,7 @@ import Book from "../components/Book";
 import Furniture from "../components/Furniture";
 
 const baseURL = "https://slung-summers.000webhostapp.com/v1";
+let skuExists;
 
 const Add = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Add = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const skuExists = items.some((item) => item.sku === sku);
+    skuExists = items.some((item) => item.sku === sku);
 
     if (!sku || !name || !price || price <= 0 || !productType || skuExists) {
       setError(true);
@@ -144,7 +145,7 @@ const Add = () => {
           onChange={(e) => setSku(e.target.value)}
         />
         {error && !sku && <p className="warn">Please, provide product SKU</p>}
-        {error && sku && <p className="warn">Please, provide Unique SKU</p>}
+        {error && skuExists && <p className="warn">Please, provide Unique SKU</p>}
 
         <label htmlFor="name">Name:</label>
         <input
