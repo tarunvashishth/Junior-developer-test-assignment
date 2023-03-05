@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const baseURL = "https://slung-summers.000webhostapp.com/v1";
+// const baseURL = "https://slung-summers.000webhostapp.com/v1";
 
 const List = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const List = () => {
 
   const getApiData = async () => {
     await axios
-      .get(`${baseURL}/list-all.php`)
+      .get(`/list-all.php`)
       .then((response) => setItems(response.data.data))
       .catch((error) => console.log(error));
   };
@@ -32,7 +32,7 @@ const List = () => {
 
   async function handleDelete() {
     await axios
-      .post(`${baseURL}/delete.php`, { data: { id: checkboxes } })
+      .post(`/delete.php`, { data: { id: checkboxes } })
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
 
