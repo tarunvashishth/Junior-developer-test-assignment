@@ -28,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
             "status" => 200,
             "data" => $res
         ));
+    } else {
+        http_response_code(404); //data not found
+        echo json_encode(array(
+            "status" => 404,
+            "message" => "No data present"
+        ));
     }
 } else {
     http_response_code(503); //service unavailable
