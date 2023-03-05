@@ -23,10 +23,10 @@ const Add = () => {
   const [length, setLength] = useState("");
   const [error, setError] = useState(false);
 
-  const getApiData = () => {
-    axios
-      .get(`${baseURL}/list-all.php`)
-      .then((response) => setItems(response.data.data))
+  const getApiData = async () => {
+    await fetch(`${baseURL}/list-all.php`)
+      .then((response) => response.json())
+      .then((response) => setItems(response.data))
       .catch((error) => console.log(error));
   };
 
@@ -52,14 +52,17 @@ const Add = () => {
         if (!size || size <= 0) {
           setError(true);
         } else if (error === false) {
-          await axios
-            .post(`${baseURL}/insert/create-dvd.php`, {
+          await fetch(`${baseURL}/insert/create-dvd.php`, {
+            method: "POST",
+            body: JSON.stringify({
               sku,
               name,
               price,
               size,
-            })
-            .then((response) => console.log(response.data))
+            }),
+          })
+            .then((response) => response.json())
+            .then((response) => console.log(response))
             .catch((error) => console.log(error));
 
           navigate("/");
@@ -69,14 +72,17 @@ const Add = () => {
         if (!weight || weight <= 0) {
           setError(true);
         } else if (error === false) {
-          await axios
-            .post(`${baseURL}/insert/create-book.php`, {
+          await fetch(`${baseURL}/insert/create-book.php`, {
+            method: "POST",
+            body: JSON.stringify({
               sku,
               name,
               price,
               weight,
-            })
-            .then((response) => console.log(response.data))
+            }),
+          })
+            .then((response) => response.json())
+            .then((response) => console.log(response))
             .catch((error) => console.log(error));
 
           navigate("/");
@@ -93,16 +99,19 @@ const Add = () => {
         ) {
           setError(true);
         } else if (error === false) {
-          await axios
-            .post(`${baseURL}/insert/create-furniture.php`, {
+          await fetch(`${baseURL}/insert/create-furniture.php`, {
+            method: "POST",
+            body: JSON.stringify({
               sku,
               name,
               price,
               height,
               width,
               length,
-            })
-            .then((response) => console.log(response.data))
+            }),
+          })
+            .then((response) => response.json())
+            .then((response) => console.log(response))
             .catch((error) => console.log(error));
 
           navigate("/");

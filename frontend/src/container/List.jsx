@@ -11,9 +11,9 @@ const List = () => {
   const [checkboxes, setCheckboxes] = useState([]);
 
   const getApiData = async () => {
-    await axios
-      .get(`${baseURL}/list-all.php`)
-      .then((response) => setItems(response.data.data))
+    await fetch(`${baseURL}/list-all.php`)
+      .then((response) => response.json())
+      .then((response) => setItems(response.data))
       .catch((error) => console.log(error));
   };
 
@@ -31,9 +31,12 @@ const List = () => {
   }
 
   async function handleDelete() {
-    await axios
-      .post(`${baseURL}/delete.php`, { data: { id: checkboxes } })
-      .then((response) => console.log(response.data))
+    await fetch(`${baseURL}/delete.php`, {
+      method: "POST",
+      body: JSON.stringify({ id: checkboxes }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response))
       .catch((error) => console.log(error));
 
     getApiData();
