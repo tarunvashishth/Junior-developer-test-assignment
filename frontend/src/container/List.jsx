@@ -32,7 +32,7 @@ const List = () => {
 
   async function handleDelete() {
     await axios
-      .delete(`${baseURL}/delete.php`, { data: { id: checkboxes } })
+      .post(`${baseURL}/delete.php`, { data: { id: checkboxes } })
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
 
