@@ -1,6 +1,5 @@
 <?php
 
-require_once('Product.php');
 
 abstract class Product
 {
