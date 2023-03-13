@@ -107,7 +107,7 @@ const Add = () => {
               sku,
               name,
               price,
-              productType,
+              productType ,
               height,
               width,
               length,

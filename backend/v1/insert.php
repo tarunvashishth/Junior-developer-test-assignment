@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    if ($data->type == 'dvd') $product = new Dvd();
-    if ($data->type == 'book') $product = new Book();
-    if ($data->type == 'furniture') $product = new Furniture();
+    if ($data->productType == 'dvd') $product = new Dvd();
+    if ($data->productType == 'book') $product = new Book();
+    if ($data->productType == 'furniture') $product = new Furniture();
 
     if (!empty($data->sku) && !empty($data->name) && !empty($data->price)) {
 
