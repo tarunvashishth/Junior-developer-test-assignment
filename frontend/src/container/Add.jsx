@@ -52,12 +52,13 @@ const Add = () => {
         if (!size || size <= 0) {
           setError(true);
         } else if (error === false) {
-          await fetch(`${baseURL}/insert/create-dvd.php`, {
+          await fetch(`${baseURL}/insert.php`, {
             method: "POST",
             body: JSON.stringify({
               sku,
               name,
               price,
+              productType,
               size,
             }),
           })
@@ -72,12 +73,13 @@ const Add = () => {
         if (!weight || weight <= 0) {
           setError(true);
         } else if (error === false) {
-          await fetch(`${baseURL}/insert/create-book.php`, {
+          await fetch(`${baseURL}/insert.php`, {
             method: "POST",
             body: JSON.stringify({
               sku,
               name,
               price,
+              productType,
               weight,
             }),
           })
@@ -99,12 +101,13 @@ const Add = () => {
         ) {
           setError(true);
         } else if (error === false) {
-          await fetch(`${baseURL}/insert/create-furniture.php`, {
+          await fetch(`${baseURL}/insert.php`, {
             method: "POST",
             body: JSON.stringify({
               sku,
               name,
               price,
+              productType,
               height,
               width,
               length,
@@ -144,7 +147,9 @@ const Add = () => {
           onChange={(e) => setSku(e.target.value)}
         />
         {error && !sku && <p className="warn">Please, provide product SKU</p>}
-        {error && skuExists && <p className="warn">Please, provide Unique SKU</p>}
+        {error && skuExists && (
+          <p className="warn">Please, provide Unique SKU</p>
+        )}
 
         <label htmlFor="name">Name:</label>
         <input

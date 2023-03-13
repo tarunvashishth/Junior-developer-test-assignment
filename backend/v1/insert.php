@@ -4,10 +4,12 @@ header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json");
 header("Access-Control-Allow-Methods: POST");
 
-include_once("../../config/database.php");
-include_once("../../config/operations.php");
-include_once("../../classes/product.php");
-include_once("../../classes/furniture.php");
+include_once("../config/database.php");
+include_once("../config/operations.php");
+include_once("../classes/product.php");
+include_once("../classes/book.php");
+include_once("../classes/dvd.php");
+include_once("../classes/furniture.php");
 
 //object for database
 $db = new Database();
@@ -16,18 +18,24 @@ $connection = $db->connect();
 
 $operation = new Operations($connection);
 
-$product = new Furniture();
-
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    if (!empty($data->sku) && !empty($data->name) && !empty($data->price) && !empty($data->height) && !empty($data->width) && !empty($data->length)) {
+    if ($data->type == 'dvd') $product = new Dvd();
+    if ($data->type == 'book') $product = new Book();
+    if ($data->type == 'furniture') $product = new Furniture();
+
+    if (!empty($data->sku) && !empty($data->name) && !empty($data->price)) {
 
         $product->setSku($data->sku);
         $product->setName($data->name);
         $product->setPrice($data->price);
-        $product->setDimension($data->height, $data->width, $data->length);
+        if (!empty($data->weight)) $product->setWeight($data->weight);
+        if (!empty($data->size)) $product->setSize($data->size);
+        if (!empty($data->height) && !empty($data->width) && !empty($data->length)) {
+            $product->setDimension($data->height, $data->width, $data->length);
+        }
         $product->setAttribute();
 
         if ($operation->create($product)) {
