@@ -48,7 +48,7 @@ const Add = () => {
     if (!sku || !name || !price || price <= 0 || !productType || skuExists) {
       setError(true);
     } else {
-      if (productType === "dvd") {
+      if (productType === "Dvd") {
         if (!size || size <= 0) {
           setError(true);
         } else if (error === false) {
@@ -69,7 +69,7 @@ const Add = () => {
           navigate("/");
         }
       }
-      if (productType === "book") {
+      if (productType === "Book") {
         if (!weight || weight <= 0) {
           setError(true);
         } else if (error === false) {
@@ -90,7 +90,7 @@ const Add = () => {
           navigate("/");
         }
       }
-      if (productType === "furniture") {
+      if (productType === "Furniture") {
         if (
           !height ||
           height <= 0 ||
@@ -107,7 +107,7 @@ const Add = () => {
               sku,
               name,
               price,
-              productType ,
+              productType,
               height,
               width,
               length,
@@ -183,13 +183,13 @@ const Add = () => {
           onChange={handleProductTypeChange}
         >
           <option value="">Select product type</option>
-          <option value="dvd" id="DVD">
+          <option value="Dvd" id="DVD">
             DVD
           </option>
-          <option value="book" id="Book">
+          <option value="Book" id="Book">
             Book
           </option>
-          <option value="furniture" id="Furniture">
+          <option value="Furniture" id="Furniture">
             Furniture
           </option>
         </select>
@@ -197,15 +197,15 @@ const Add = () => {
           <p className="warn">Please, provide product type</p>
         )}
 
-        {productType === "dvd" && (
+        {productType === "Dvd" && (
           <Dvd size={size} setSize={setSize} error={error} />
         )}
 
-        {productType === "book" && (
+        {productType === "Book" && (
           <Book weight={weight} setWeight={setWeight} error={error} />
         )}
 
-        {productType === "furniture" && (
+        {productType === "Furniture" && (
           <Furniture
             height={height}
             setHeight={setHeight}
