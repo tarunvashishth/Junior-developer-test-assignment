@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $productType = $data->productType;
-    $product = new $productType();
+    $product = new $data->productType();
 
     if (!empty($data->sku) && !empty($data->name) && !empty($data->price)) {
 
